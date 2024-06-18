@@ -1,0 +1,10 @@
+#! /bin/sh
+
+set -e
+
+WIFI_INTERFACE=$(snapctl get wifi-interface)
+SSID=$(snapctl get ssid)
+PASSWORD=$(snapctl get password)
+
+nmcli d wifi hotspot ifname $WIFI_INTERFACE ssid "$SSID" password "$PASSWORD"
+

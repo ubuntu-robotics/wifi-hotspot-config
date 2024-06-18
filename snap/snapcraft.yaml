@@ -1,0 +1,40 @@
+name: wifi-hotspot-config
+version: '0.1'
+summary: Basic configuration for wifi-hotspot
+description: |
+  This snap carries out basic configuration for an UbuntuCore appliance
+  needing a wifi hotspot.
+  Three parameters are used
+
+  "ssid" with default value "UbuntuCore Hotspot",
+
+  "password" with default value "0123456789",
+
+  "wifi-interface" with default value "wlan0".
+
+
+base: core20
+grade: stable
+confinement: strict
+
+architectures:
+  - build-on: amd64
+  - build-on: armhf
+  - build-on: arm64
+
+apps:
+  create-hotspot:
+    command: bin/create-hotspot
+    daemon: simple
+    plugs:
+      - network-manager
+
+parts:
+  config:
+    plugin: nil
+    source: .
+    override-build: |
+      mkdir -p $SNAPCRAFT_PART_INSTALL/bin
+      cp -av create-hotspot $SNAPCRAFT_PART_INSTALL/bin/
+    stage-packages: [network-manager]
+
