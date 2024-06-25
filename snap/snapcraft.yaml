@@ -2,11 +2,11 @@ name: wifi-hotspot-config
 version: '0.1'
 summary: Basic configuration for wifi-hotspot
 description: |
-  This snap carries out basic configuration for an UbuntuCore appliance
+  This snap carries out basic configuration for an Ubuntu Core appliance
   needing a wifi hotspot.
   Three parameters are used
 
-  "ssid" with default value "UbuntuCore Hotspot",
+  "ssid" with default value "Ubuntu Core Hotspot",
 
   "password" with default value "0123456789",
 

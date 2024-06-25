@@ -18,7 +18,7 @@ This snap has been tested on [Ubuntu Core 20](https://ubuntu.com/core).
 ## Configurations
 
 The snap takes 3 configurations:
-- `ssid`, the ssid of the hotspot to create. Default value: `UbuntuCore Hotspot`
+- `ssid`, the ssid of the hotspot to create. Default value: `Ubuntu Core Hotspot`
 - `password`, the password if the hotspot to create. Default value: `0123456789`
 - `wifi-interface`, the name of the wifi interface to use for the hotspot. Default value: `wlan0`
 
