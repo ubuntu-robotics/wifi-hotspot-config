@@ -10,7 +10,8 @@ description: |
 
   "password" is not set by default value,
 
-  "wifi-interface" with default value "wlan0".
+  "wifi-interface" with default value set to the first
+   wireless interface detected.
 
 
 base: core20
@@ -22,11 +23,17 @@ architectures:
   - build-on: armhf
   - build-on: arm64
 
+hooks:
+  install:
+    plugs: [network-manager]
+  configure:
+    plugs: [network-manager]
+
 apps:
   create-hotspot:
     command: bin/create-hotspot
     daemon: simple
-    install-mode: disabled
+    install-mode: disable
     plugs:
       - network-manager
 

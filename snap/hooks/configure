@@ -2,6 +2,15 @@
 
 snapctl stop $SNAP_NAME.create-hotspot --disable
 
+WIFI_INTERFACE=$(snapctl get wifi-interface)
+AVAILABLE_WIFI_INTERFACES=$(nmcli --get-values GENERAL.DEVICE,GENERAL.TYPE device show | sed '/^wifi/!{h;d;};x')
+
+grep -q -x "$WIFI_INTERFACE" <(echo "$AVAILABLE_WIFI_INTERFACES")
+if [ $? -ne 0 ]; then
+  echo " The wifi interface set is not available on the device" >&2
+  return 1
+fi
+
 PASSWORD=$(snapctl get password)
 if [ -z "$PASSWORD" ]; then
   echo "PASSWORD is empty not enabling the hotspot" >&2
