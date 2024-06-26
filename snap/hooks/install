@@ -2,5 +2,5 @@
 
 snapctl set wifi-interface="wlan0"
 snapctl set ssid="Ubuntu Core Hotspot"
-snapctl set password="0123456789"
+snapctl set password!
 

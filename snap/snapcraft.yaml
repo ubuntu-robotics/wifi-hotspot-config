@@ -8,7 +8,7 @@ description: |
 
   "ssid" with default value "Ubuntu Core Hotspot",
 
-  "password" with default value "0123456789",
+  "password" is not set by default value,
 
   "wifi-interface" with default value "wlan0".
 
@@ -26,6 +26,7 @@ apps:
   create-hotspot:
     command: bin/create-hotspot
     daemon: simple
+    install-mode: disabled
     plugs:
       - network-manager
 

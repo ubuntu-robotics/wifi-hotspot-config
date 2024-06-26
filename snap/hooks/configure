@@ -1,4 +1,12 @@
 #!/bin/sh
 
-snapctl restart $SNAP_NAME.create-hotspot
+snapctl stop $SNAP_NAME.create-hotspot --disable
+
+PASSWORD=$(snapctl get password)
+if [ -z "$PASSWORD" ]; then
+  echo "PASSWORD is empty not enabling the hotspot" >&2
+  return
+fi
+
+snapctl start $SNAP_NAME.create-hotspot --enable
 
