@@ -6,12 +6,12 @@ description: |
   needing a wifi hotspot.
   Three parameters are used
 
-  "ssid" with default value "UbuntuCore Hotspot",
+  "ssid" with default value "Ubuntu Core Hotspot",
 
-  "password" with default value "0123456789",
+  "password" which is not set by default,
 
-  "wifi-interface" with default value "wlan0".
-
+  "wifi-interface" with default value set to the first
+   wireless interface detected.
 
 base: core20
 grade: stable
@@ -22,10 +22,22 @@ architectures:
   - build-on: armhf
   - build-on: arm64
 
+
+hooks:
+  install:
+    plugs: [network-manager]
+  configure:
+    plugs: [network-manager]
+
+layout:
+  /usr/lib/libnm.so.0:
+    symlink: $SNAP/usr/lib/libnm.so.0
+
 apps:
   create-hotspot:
     command: bin/create-hotspot
     daemon: simple
+    install-mode: disable
     plugs:
       - network-manager
 
@@ -36,5 +48,5 @@ parts:
     override-build: |
       mkdir -p $SNAPCRAFT_PART_INSTALL/bin
       cp -av create-hotspot $SNAPCRAFT_PART_INSTALL/bin/
-    stage-packages: [network-manager]
+    stage-snaps: [network-manager/20/stable]
 

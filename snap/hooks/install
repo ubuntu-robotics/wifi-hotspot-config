@@ -1,6 +1,12 @@
 #!/bin/sh
 
-snapctl set wifi-interface="wlan0"
-snapctl set ssid="UbuntuCore Hotspot"
-snapctl set password="0123456789"
+# necessary to find nmcli
+PATH="$SNAP/usr/bin:$PATH"
+
+# wireless interface detection
+WIFI_INTERFACE=$(nmcli --get-values GENERAL.DEVICE,GENERAL.TYPE device show | sed '/^wifi/!{h;d;};x' | awk 'NR==1{print $0}')
+
+snapctl set wifi-interface="$WIFI_INTERFACE"
+
+snapctl set ssid="Ubuntu Core Hotspot"
 
