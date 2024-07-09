@@ -11,14 +11,14 @@ AVAILABLE_WIFI_INTERFACES=$(nmcli --get-values GENERAL.DEVICE,GENERAL.TYPE devic
 echo "$AVAILABLE_WIFI_INTERFACES" | grep -q -x "$WIFI_INTERFACE"
 if [ $? -ne 0 ]; then
   logger -t ${SNAP_NAME} "The wifi interface set ($WIFI_INTERFACE) is not available on the device"
-  logger -t ${SNAP_NAME} "The available interfaces are: $AVAILABLE_WIFI_INTERFACES"
+  logger -t ${SNAP_NAME} "Available interfaces are: $AVAILABLE_WIFI_INTERFACES"
   snapctl set wifi-interface!
   return
 fi
 
 PASSWORD=$(snapctl get password)
 if [ -z "$PASSWORD" ]; then
-  logger -t ${SNAP_NAME} "password is empty not enabling the hotspot"
+  logger -t ${SNAP_NAME} "password is empty, not enabling the hotspot"
   return
 fi
 
