@@ -10,7 +10,7 @@ AVAILABLE_WIFI_INTERFACES=$(nmcli --get-values GENERAL.DEVICE,GENERAL.TYPE devic
 
 echo "$AVAILABLE_WIFI_INTERFACES" | grep -q -x "$WIFI_INTERFACE"
 if [ $? -ne 0 ]; then
-  logger -t ${SNAP_NAME} "The wifi interface set ($WIFI_INTERFACE) is not available on the device"
+  logger -t ${SNAP_NAME} "Could not find the wireless interface '${WIFI_INTERFACE}' on the device"
   logger -t ${SNAP_NAME} "Available interfaces are: $AVAILABLE_WIFI_INTERFACES"
   snapctl set wifi-interface!
   return
